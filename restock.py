@@ -14,8 +14,23 @@ Function Output:
 ----------------
 available_items:(integer) This function returns this integer which updates the available items at the current day.
 
-
-The function will also update the inventory_records (For restocking) for a  given current day. It will also return "available_items".
+The function will also update the inventory_records (For restocking) for a given current day. It will also return "available_items".
     '''
 
+    # This is creating a list for the restocking days by using a step range
+    restocking_days = list(range(0, 50, 7))
+    
+    #This checks whether the current day comes across a restocking day by going through the restock day list
+    if current_day in restocking_days:
+        restocked_units = 2000 - available_items # Checks for the units required for 2000
+        available_items += restocked_units # This updates available stock after restocking
+    else:
+        restocked_units = 0 # No restocks for non-restock days
+    
+    # This adds the data for the current day
+    inventory_records.append([current_day, 0, restocked_units, available_items])
+
+   
+
+    
     return available_items
